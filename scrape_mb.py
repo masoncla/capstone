@@ -37,24 +37,24 @@ def grab_body(url):
     data = str(art)[:idx]
     data = re.sub(r'<.*?>', '', data)
     data = re.sub('\xa0', '', data)
-    data = re.sub('\n', ' ', data)
+    #data = re.sub('\n', ' ', data)
     return data, soup.title.text
 
 
 def get_bodies_on_page(url):
-    df = pd.DataFrame(columns=['title', 'body', 'url'])
+    df = pd.DataFrame(columns=['title', 'body'])
     links = get_recipe_links(url)
     for link in links:
         try:
             body, title = grab_body(link)
-            A = pd.DataFrame([[title, body, link]], columns=['title', 'body', 'url'])
+            A = pd.DataFrame([[title, body]], columns=['title', 'body'])
             df = pd.concat([df,A], axis=0)
         except:
             continue
     return df
 
 def scrape_mb(url):
-    data = pd.DataFrame(columns=['title','body','url'])
+    data = pd.DataFrame(columns=['title','body'])
     data = pd.concat([data, get_bodies_on_page(url)], axis=0)
     for n in range(2, 61):
         url = 'https://minimalistbaker.com/recipes/page/{}/'.format(n)
