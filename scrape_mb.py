@@ -3,6 +3,7 @@ import requests
 import re
 import pandas as pd
 import numpy as np
+from nltk import sent_tokenize
 from sys import argv, exit
 
 def make_soup(url):
@@ -40,26 +41,38 @@ def grab_body(url):
     #data = re.sub('\n', ' ', data)
     return data, soup.title.text
 
+def get_recipe_instructions(url):
+    '''
+    returns the a list of the instruction sentence strings from the recipe post at the inputted url
+    '''
+    soup = make_soup(url)
+    # get recipe instruction conatiners
+    recipe = soup.find_all('div', class_="wprm-recipe-instruction-text")
+    # isolate just the text
+    instructions = [instruct.text for instruct in recipe]
+    return ''.join(instructions)
+
 
 def get_bodies_on_page(url):
-    df = pd.DataFrame(columns=['title', 'body'])
+    df = pd.DataFrame(columns=['title', 'body', 'instructions'])
     links = get_recipe_links(url)
     for link in links:
         try:
             body, title = grab_body(link)
-            A = pd.DataFrame([[title, body]], columns=['title', 'body'])
-            df = pd.concat([df,A], axis=0)
+            instruct = get_recipe_instructions(link)
+            A = pd.DataFrame([[title, body, instruct]], columns=['title', 'body', 'instructions'])
+            df = pd.concat([df,A], axis=0, ignore_index=True)
         except:
             continue
     return df
 
 def scrape_mb(url):
-    data = pd.DataFrame(columns=['title','body'])
+    data = pd.DataFrame(columns=['title','body', 'instructions'])
     data = pd.concat([data, get_bodies_on_page(url)], axis=0)
     for n in range(2, 61):
         url = 'https://minimalistbaker.com/recipes/page/{}/'.format(n)
         df = get_bodies_on_page(url)
-        data = pd.concat([data, df], axis=0)
+        data = pd.concat([data, df], axis=0, ignore_index=True)
     return data
 
 if __name__ == '__main__':
