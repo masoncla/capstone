@@ -6,8 +6,6 @@ import pandas as pd
 import requests
 
 from collections import defaultdict
-import nltk
-nltk.download('punkt')
 from nltk import sent_tokenize
 
 
@@ -39,7 +37,7 @@ def get_corr(embeded_inst):
     for i in range(len(embeded_inst)):
         corr = np.inner(embeded_inst[i][0], embeded_inst[i][1])
         max_corr = np.array([(i, row.max()) for i, row in enumerate(corr)])
-        sent_df = pd.DataFrame(data.body_sents.iloc[i], columns=['sentence'])
+        sent_df = pd.DataFrame(data.body_sents.iloc[i].encode('utf-8'), columns=['sentence'])
         array_df = pd.DataFrame(embeded_inst[i][0])
         rel_df = pd.DataFrame(max_corr[:,1], columns=['correlation'])
         labelled = pd.concat([sent_df, array_df, rel_df], axis=1)
