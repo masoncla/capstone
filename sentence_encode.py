@@ -34,11 +34,11 @@ def sent_engineer(df):
 
 def get_corr(embeded_inst):
     final = pd.DataFrame(columns=['sentence', 'correlation'])
-    for i in range(len(embeded_inst)):
+    for i in embeded_inst.keys():
         corr = np.inner(embeded_inst[i][0], embeded_inst[i][1])
         max_corr = np.array([(i, row.max()) for i, row in enumerate(corr)])
-        sent_df = pd.DataFrame(data.body_sents.iloc[i].encode('utf-8'), columns=['sentence'])
-        array_df = pd.DataFrame(embeded_inst[i][0])
+        sent_df = pd.DataFrame([sent.encode('utf-8') for sent in data.body_sents.iloc[i]], columns=['sentence'])
+        #array_df = pd.DataFrame([row for row in embeded_inst[i][0]])
         rel_df = pd.DataFrame(max_corr[:,1], columns=['correlation'])
         labelled = pd.concat([sent_df, array_df, rel_df], axis=1)
         final = pd.concat([final, labelled], ignore_index=True)
@@ -63,7 +63,7 @@ if __name__=='__main__':
 
     with tf.Session() as session:
         session.run([tf.global_variables_initializer(), tf.tables_initializer()])
-        for i in range(80):
+        for i in range(10):
             embed_body = session.run(embed(data.body_sents.iloc[i]))
             embed_inst = session.run(embed(data.inst_sents.iloc[i]))
             embeded[i] = (embed_body, embed_inst)
