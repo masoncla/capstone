@@ -6,5 +6,5 @@ If you've ever looked for recipes online you might've come across blogs where yo
 2. I then used Google's Universal Sentence Encoder to create a vector representation of each sentence in the body and instuctions of each post.
 3. I then created a similarity matrix, using cosine similarity, to compare the body to the instructions. I assigned the max value of each row to its corresponding body sentence as the "correlation score". Right now I've classified anything with a correlation over 0.75 as relevant and using classification. I've found this to be accurate.
     - I want to put some helpful graphics in here to explain it better
-4. My current model uses K Nearest Neighbors to predict whether a new sentence is relevant of not.
+4. My current model uses K Nearest Neighbors to predict whether a new sentence is relevant of not. Thus far I'm still getting a lot of false positives, about the same as true positives, but my false negative rate is pretty low.
 5. The end product would take a new post body in and return only those sentences predicted to be useful. This could be extended to comments but would most likely require a new target engineered or a the least a thorough investigation of the current system. 'Action words' could be an important distinction between a useful comment and one that's not.
