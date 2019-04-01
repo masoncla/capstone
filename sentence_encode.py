@@ -38,9 +38,8 @@ def get_corr(embeded_inst):
         corr = np.inner(embeded_inst[i][0], embeded_inst[i][1])
         max_corr = np.array([(i, row.max()) for i, row in enumerate(corr)])
         sent_df = pd.DataFrame([sent.encode('utf-8') for sent in data.body_sents.iloc[i]], columns=['sentence'])
-        #array_df = pd.DataFrame([row for row in embeded_inst[i][0]])
         rel_df = pd.DataFrame(max_corr[:,1], columns=['correlation'])
-        labelled = pd.concat([sent_df, array_df, rel_df], axis=1)
+        labelled = pd.concat([sent_df, rel_df], axis=1)
         final = pd.concat([final, labelled], ignore_index=True)
     return final
 
@@ -63,10 +62,12 @@ if __name__=='__main__':
 
     with tf.Session() as session:
         session.run([tf.global_variables_initializer(), tf.tables_initializer()])
-        for i in range(10):
+        for i in range(len(data)):
             embed_body = session.run(embed(data.body_sents.iloc[i]))
             embed_inst = session.run(embed(data.inst_sents.iloc[i]))
             embeded[i] = (embed_body, embed_inst)
 
+    D = pd.DataFrame(data=embeded.values(), columns=embeded.keys())
+    D.to_csv('data_vecs.csv')
     final = get_corr(embeded)
-    final.to_csv('vec_data.csv')
+    final.to_csv('corr_data.csv')
