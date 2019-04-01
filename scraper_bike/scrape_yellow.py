@@ -26,7 +26,7 @@ def grab_body(url):
     '''
     soup = make_soup(url)
     body = [line.text for line in soup.find("div", class_="entry-content").find_all("p") if line.text !='' and line.text!='     '  and line.text!='\xa0']
-    return body
+    return ''.join(body)
 
 def get_recipe_links(url):
     soup = make_soup(url)
@@ -72,4 +72,4 @@ def scrape_it_all(url):
 
 if __name__=='__main__':
     df = scrape_it_all(main_url)
-    df.to_csv('data/yellow.csv')
+    df.to_csv('/Users/clairemason/Galvanize/Capstone/capstone/data/yellow.csv')
