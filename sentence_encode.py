@@ -32,7 +32,7 @@ def sent_engineer(df):
     data = pd.concat([df, body_sents_df, inst_sents_df], axis=1)
     return data
 
-def get_corr(embeded_inst):
+def get_corr(embeded_inst, data):
     final = pd.DataFrame(columns=['sentence', 'correlation'])
     for i in embeded_inst.keys():
         corr = np.inner(embeded_inst[i][0], embeded_inst[i][1])
@@ -66,8 +66,9 @@ if __name__=='__main__':
             embed_body = session.run(embed(data.body_sents.iloc[i]))
             embed_inst = session.run(embed(data.inst_sents.iloc[i]))
             embeded[i] = (embed_body, embed_inst)
-
+    # put vector arrays into dataframe
     D = pd.DataFrame(data=embeded.values(), columns=embeded.keys())
     D.to_csv('data_vecs.csv')
-    final = get_corr(embeded)
+    # put sentences and correlations into dataframe
+    final = get_corr(embeded, data)
     final.to_csv('corr_data.csv')
