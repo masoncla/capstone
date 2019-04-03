@@ -9,22 +9,6 @@ from sys import argv, exit
 
 
 
-
-def get_corr(embeded_inst, data):
-    final = pd.DataFrame(columns=['sentence', 'correlation'])
-    for i in embeded_inst.keys():
-        corr = np.inner(embeded_inst[i][0], embeded_inst[i][1])
-        max_corr = np.array([(i, row.max()) for i, row in enumerate(corr)])
-        sent_df = pd.DataFrame([sent.encode('utf-8') for sent in data.body_sents.iloc[i]], columns=['sentence'])
-        rel_df = pd.DataFrame(max_corr[:,1], columns=['correlation'])
-        labelled = pd.concat([sent_df, rel_df], axis=1)
-        final = pd.concat([final, labelled], ignore_index=True)
-    return final
-
-
-
-
-
 if __name__=='__main__':
     data = pd.read_csv(argv[1])
     sent_batch = data.sentence.values
