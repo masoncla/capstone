@@ -1,11 +1,19 @@
 import pandas as pd 
 import numpy as np 
+from sys import argv
 
+
+    
 def get_corr_df(bodies, instructions):
     '''
     takes dataframes containing sentences and vectors for both body and instructions
     and returns a dataframe with just the body sentences, vectors, and instruction similarity
     '''
+    # clean up input
+    bodies.drop(bodies.columns[:2], axis=1, inplace=True)
+    instructions.drop(instructions.columns[:2], axis=1, inplace=True)
+
+
     final = pd.DataFrame(columns=['sentence', 'correlation'])
     for i in bodies['post'].unique():
         # grab an array of the vector representations for body and instructions
@@ -25,3 +33,13 @@ def get_corr_df(bodies, instructions):
         
     return final
 
+if __name__=='__main__':
+    input_body_file = argv[1]
+    input_inst_file = argv[2]
+    export_file = argv[3]
+
+    bods = pd.read_csv(input_body_file)
+    inst = pd.read_csv(input_inst_file)
+
+    result = get_corr_df(bods, inst)
+    result.to_csv(export_file)
