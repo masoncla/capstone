@@ -7,7 +7,7 @@ def get_corr_df(bodies, instructions):
     and returns a dataframe with just the body sentences, vectors, and instruction similarity
     '''
     final = pd.DataFrame(columns=['sentence', 'correlation'])
-    for i in min_bodies['post'].unique():
+    for i in bodies['post'].unique():
         # grab an array of the vector representations for body and instructions
         body = bodies[bodies['post']==i].iloc[:,2:].values
         instruct = instructions[instructions['post']==i].iloc[:,2:].values
@@ -25,5 +25,3 @@ def get_corr_df(bodies, instructions):
         
     return final
 
-    if __name__=='__main__':
-        
