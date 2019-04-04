@@ -7,10 +7,10 @@ If you've ever looked for recipes online you might've come across blogs where yo
     - Where did it come from?
 
 2. Making it usable
-        - Google Universal Sentence Encoder
-        - Label Engineering for training
+    - Google Universal Sentence Encoder
+    - Label Engineering for training
 
-3. Modelling
+3. Modeling
     - What didn't work and why
     - What did work and why
 
@@ -30,4 +30,5 @@ Each sentence has a corresponding arbitray post label so the body sentences and 
 ## Making it usable
 I used Google's Universal Sentence Encoder(GUSE) to create vectorizations of every sentence. I want to capture the whole sentence rather than the words within. I tried using TFIDF vectorizations, based on inverse word frequency, but it created huge vector with less information than GUSE. GUSE also produces vectors of length 512 which is more managable than the length of vectors produced by other sentence encoders, like Skip-Thoughts.
 Once I had the vectors for both the bodies and the sentences I could use cosine similarity to generate labels for the body sentences, relevant or not. In this way I defined relevance as similarity to the final recipe. 
+
 ![heatmap](https://github.com/masoncla/capstone/blob/master/heatmap.png)
