@@ -37,6 +37,8 @@ Once I had the vectors for both the bodies and the sentences I could use cosine 
 I started modeling with K Nearest Neighbors. I figured that since the labelling is based on semantic similarity, a similarity based model would be a good fit. At first I was getting concerningly good results but realized it was due to the way I was splitting my model into testing and training subsets. By randomly assiging data points (body sentences) to each subgroup I was essentially testing on sentences that came from blog posts that also appeared in my training set. I changed the way my data was stored to keep different blog sources seperate. From here on a subset my testing and training sets by blog source. I trained on certain blogs and tested on others, preventing leakage. This strategey did a decent job but I wanted to explore other classification methods. 
 
 ## Results
+will explain
+![conf_mat](https://github.com/masoncla/recipe_blog_post_relevance/blob/master/img/confusion_mat.png)
 
 ## Further Steps
 I'd like to revisit the labels I've created and check them all individually. While this system is effective on a basic level I think there are refinements that can be made to filter for relevant information that is not necessarily semantically similar to the instructions. I'd like to be able to apply this model effectively to comments left by readers, as these can contain useful tips or elaborations. Right now the block to that is that a comment saying something like "I love asparagus!" on a recipe for asparagus is relevant under my current definition but is not necessarilty useful. Grabbing the useful information is a task that I would like to build this project into.
