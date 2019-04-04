@@ -83,4 +83,4 @@ if __name__ == '__main__':
     df = scrape_mb(url)
 
     # write to a csv
-    df.to_csv('data/minimal_bake.csv')
+    df.to_csv(argv[2])
