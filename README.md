@@ -38,7 +38,7 @@ I started modeling with K Nearest Neighbors. I figured that since the labelling 
 
 ## Results
 will explain
-![conf_mat](https://github.com/masoncla/recipe_blog_post_relevance/blob/master/img/confusion_mat.png =50x50)
+<img src="img/confusion_mat.png" width="400">
 
 ## Further Steps
 I'd like to revisit the labels I've created and check them all individually. While this system is effective on a basic level I think there are refinements that can be made to filter for relevant information that is not necessarily semantically similar to the instructions. I'd like to be able to apply this model effectively to comments left by readers, as these can contain useful tips or elaborations. Right now the block to that is that a comment saying something like "I love asparagus!" on a recipe for asparagus is relevant under my current definition but is not necessarilty useful. Grabbing the useful information is a task that I would like to build this project into.
