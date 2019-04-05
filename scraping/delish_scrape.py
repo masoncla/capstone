@@ -73,4 +73,4 @@ def scrape(url):
 if __name__=='__main__':
     url = 'https://damndelicious.net/recipe-index/'
     data = scrape(url)
-    data.to_csv('data/delicious.csv')
+    data.to_csv('data/delicious.csv', index=False)

@@ -72,4 +72,4 @@ def scrape_it_all(url):
 
 if __name__=='__main__':
     df = scrape_it_all(main_url)
-    df.to_csv('/Users/clairemason/Galvanize/Capstone/capstone/data/yellow.csv')
+    df.to_csv('/Users/clairemason/Galvanize/Capstone/capstone/data/yellow.csv', index=False)

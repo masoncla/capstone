@@ -42,4 +42,4 @@ if __name__=='__main__':
     inst = pd.read_csv(input_inst_file)
 
     result = get_corr_df(bods, inst)
-    result.to_csv(export_file)
+    result.to_csv(export_file, index=False)

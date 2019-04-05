@@ -55,6 +55,6 @@ if __name__=='__main__':
 
     body, instruct = split_into_dfs(data)
 
-    body.to_csv(body_file)
-    instruct.to_csv(instruct_file)
+    body.to_csv(body_file, index=False)
+    instruct.to_csv(instruct_file, index=False)
 

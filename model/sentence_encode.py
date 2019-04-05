@@ -18,9 +18,6 @@ if __name__=='__main__':
     # Import the Universal Sentence Encoder's TF Hub module
     embed = hub.Module(module_url)
     
-
-    
-
     # create GUSE placeholder
     sentences = tf.placeholder(dtype=tf.string, shape=[None])
     embedding = embed(sentences)
@@ -35,4 +32,4 @@ if __name__=='__main__':
     # put sentences and correlations into dataframe
     array_df = pd.DataFrame(embed_body)
     final = pd.concat([data, array_df], axis=1)
-    final.to_csv(argv[2])
+    final.to_csv(argv[2], index=False)
