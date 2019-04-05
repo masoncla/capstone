@@ -49,6 +49,6 @@ if __name__=='__main__':
     text_to_sum_relevance = pd.read_csv(input_file)
     model = pickle.load(open(model_file, 'rb') )
     
-    rele_data = get_relevant(text_to_sum_relevance)
+    rele_data = get_relevant(text_to_sum_relevance, model)
     summary = summarize_useful(rele_data)
     print(summary)
