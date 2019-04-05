@@ -23,9 +23,9 @@ def split_sentences(body):
 
 def sent_engineer(df):
     df.dropna(inplace=True)
-    body_sents_series = pd.Series([split_sentences(df.body.iloc[i]) for i in range(len(df))])
+    body_sents_series = pd.Series([split_sentences(df.body.iloc[i].decode('utf-8')) for i in range(len(df))])
     body_sents_df = pd.DataFrame(body_sents_series, columns=['body_sents'])
-    inst_sents_series = pd.Series([split_sentences(df.instructions.iloc[i]) for i in range(len(df))])
+    inst_sents_series = pd.Series([split_sentences(df.instructions.iloc[i].decode('utf-8')) for i in range(len(df))])
     inst_sents_df = pd.DataFrame(inst_sents_series, columns = ['inst_sents'])
     data = pd.concat([df, body_sents_df, inst_sents_df], axis=1)
     return data
