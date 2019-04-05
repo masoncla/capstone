@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics.pairwise import cosine_similarity
 
 class Preprocess():
     def __init__(self, body_vectors, instruction_vectors):
@@ -20,23 +22,26 @@ class Preprocess():
             instruct = self.instructions[self.instructions['post']==i].iloc[:,2:].values
             
             # create correlations matrix
-            corr = np.inner(body, instruct)
+            corr = cosine_similarity(body, instruct)
             max_corr = np.array([(i, row.max()) for i, row in enumerate(corr)])
             
             # put into df
             rel_df = pd.DataFrame(max_corr[:,1], columns=['correlation'])
-            sents_df = pd.DataFrame(bodies.sentence[bodies.post==i].values, columns=['sentence'])
+            sents_df = pd.DataFrame(self.bodies.sentence[self.bodies.post==i].values, columns=['sentence'])
             array_df = pd.DataFrame(body)
             labelled = pd.concat([sents_df, rel_df, array_df], axis=1, sort=False)
             final = pd.concat([final, labelled], axis=0, ignore_index=True)
             
         return final
     
-    def label():
+    def label(self):
         self.result = self.transform_()
         self.result['relevance']=0
         self.result['relevance'][self.result['correlation']>=0.75]=1
         return self.result
 
 class Model():
-    def __init__(self, )
+    def __init__(self, data, model=LogisticRegression()):
+        self.data = data
+        self.model = model
+
