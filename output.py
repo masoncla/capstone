@@ -40,6 +40,7 @@ def summarize_useful(df):
 def get_relevant(df, model):
     # get predicted relevance for input dataframe
     pred_labels = model.predict(df.drop(['sentence'], axis=1))
+    
     return df[pred_labels==1]
 
 if __name__=='__main__':
@@ -50,5 +51,8 @@ if __name__=='__main__':
     model = pickle.load(open(model_file, 'rb') )
     
     rele_data = get_relevant(text_to_sum_relevance, model)
-    summary = summarize_useful(rele_data)
-    print(summary)
+    if len(rele_data)!=0:
+        summary = summarize_useful(rele_data)
+        print(summary)
+    else:
+        print('Post contains no relevant information.')
