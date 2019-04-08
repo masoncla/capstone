@@ -109,10 +109,32 @@ class Labeler():
             sents_df = pd.DataFrame(self.bodies.sentence[self.bodies.post==i].values, columns=['sentence'])
             array_df = pd.DataFrame(body)
             labelled = pd.concat([sents_df, rel_df, array_df], axis=1, sort=False)
-            final = pd.concat([final, labelled], axis=0, ignore_index=True)
+            
+
+            # create correlation columns for previous and prior sentences
+            after_corr = []
+            for i, row in enumerate(body):
+                if (i+1) in range(len(body)):
+                    after_corr.append(np.dot(body[i], body[i+1]))
+                else: 
+                    after_corr.append(0.0)
+
+            before_corr = []
+            for i, row in enumerate(body):
+                if (i-1) in range(len(body)):
+                    before_corr.append(np.dot(body[i], body[i-1]))
+                else: 
+                    before_corr.append(0.0)
+            
+            labelled['before_corr']=before_corr
+            labelled['after_corr']=after_corr
+
+            # put it all together
+            final = pd.concat([final, labelled], axis=0, ignore_index=True, sort=True)
             
         return final
-    
+
+
     def label(self):
         self.result = self.transform_()
         self.result['relevance']=0

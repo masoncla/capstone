@@ -3,23 +3,22 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 import yaml
 import pickle
-from label_engineer import get_corr_df
-
-# Create Training Data
-# import data
-df_bodies = pd.read_csv(train_body_file)
-df_instructions = pd.read_csv(train_instruction_file)
-
-# create correlation column for body sentences
-data = get_corr_df(df_bodies, df_instructions)
-
-#create labels
-data['relevance']=0
-data['relevance'][data['correlation']>=0.75]=1
 
 
+# import training data
+df_train = pd.read_csv('train_data_filepath')
+# split into features and target
+X_train = df_train.drop(['sentence', 'correlation', 'relevance'], axis=1).values
+y_train = df_train.relevance.values
+
+# get model parameters
 with open('model_param.yaml', 'r') as f:
     params = yaml.load(f)
 
 model = LogisticRegression(**params)
+model.fit(X_train, y_train)
+
+pickle.dump(model, open('path_to_pickle_file', 'wb'))
+
+
 
