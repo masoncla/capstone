@@ -109,6 +109,7 @@ class Labeler():
             sents_df = pd.DataFrame(self.bodies.sentence[self.bodies.post==i].values, columns=['sentence'])
             array_df = pd.DataFrame(body)
             labelled = pd.concat([sents_df, rel_df, array_df], axis=1, sort=False)
+            self.nearby_sim_(labelled)
             final = pd.concat([final, labelled], axis=0, ignore_index=True, sort=True)
 
             
