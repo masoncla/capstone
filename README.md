@@ -3,24 +3,14 @@ If you've ever looked for recipes online you might've come across blogs where yo
 
 ## Outline
 1. The Data
-    - What is it? 
-    - Where did it come from?
 
 2. Making it usable
-    - Google Universal Sentence Encoder
-    - Label Engineering for training
 
 3. Modeling
-    - What didn't work and why
-    - What did work and why
 
 4. Results
-    - Examples of succesful blog post conversion
-    - Recreating this project
 
 5. Further Steps
-    - Web app / plugin
-    - ??? Profit
 
 ## The Data
 The data needed for this project doesn't exist anywhere neatly so I needed to scrape a bunch of recipe blog poast from the general web. I got blog posts from some of the most popular food blogs, that are written in English. From these post I grabbed the text that made up the body of the post as well as the instructions from the recipe card at the bottom. This took some time as every blog is formatted in a slightly different way, included in this repo are a few of the scripts I used. The raw scraped data ended up looking like this:
