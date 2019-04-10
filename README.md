@@ -16,7 +16,7 @@ If you've ever looked for recipes online you might've come across blogs where yo
 The data needed for this project doesn't exist anywhere neatly so I needed to scrape a bunch of recipe blog post from the general web. I got blog posts from some of the most popular food blogs, that are written in English. From these post I grabbed the text that made up the body of the post as well as the instructions from the recipe card at the bottom. This took some time as every blog is formatted in a slightly different way, included in this repo are a few of the scripts I used. I then had to break down each individual grab into sentence strings. Each sentence has a corresponding arbitrary post label so the body sentences and instruction sentences from the same posts can be kept together. I kept data from unique blogs in separate files to aid in train/test splitting my data later.
 
 
-<img align="center" src="img/data_pipline.png" width="600">
+<img align="center" src="img/data_pipeline.png" width="600">
 
 <img align="right" src="img/heatmap.png" width="300">
 
