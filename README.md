@@ -21,12 +21,15 @@ The data needed for this project doesn't exist anywhere neatly so I needed to sc
 <img align="right" src="img/heatmap.png" width="300">
 
 ## Making it usable
-I used Google's Universal Sentence Encoder(GUSE) to create vectorizations of every sentence. I want to capture the whole sentence rather than the words within. I tried using TFIDF vectorizations, based on inverse word frequency, but it created huge vector with less information than GUSE. GUSE also produces vectors of length 512 which is more manageable than the length of vectors produced by other sentence encoders, like Skip-Thoughts.
+I used Google's Universal Sentence Encoder(GUSE) to create vectorizations of every sentence. I want to capture the whole sentence rather than the words within. I tried using TFIDF vectorizations, based on inverse word frequency, but it created huge vector with less information than GUSE. GUSE also produces vectors of length 512 which is more manageable than the length of vectors produced by other sentence encoders, like Skip-Thoughts. 
+<br/>
 Once I had the vectors for both the bodies and the sentences I could use cosine similarity to generate labels for the body sentences, relevant or not. In this way I defined relevance as similarity to the final recipe.
 
 
 ## Modeling
-I started modeling with K Nearest Neighbors. I figured that since the labelling is based on semantic similarity, a similarity based model would be a good fit. At first I was getting unreasonably good results but realized it was due to the way I was splitting my model into testing and training subsets. By randomly assigning data points (body sentences) to each subgroup I was essentially testing on sentences that came from blog posts that also appeared in my training set. I changed the way my data was stored to keep different blog sources separate. From here on a subset my testing and training sets by blog source. I trained on certain blogs and tested on others, preventing leakage. This strategy did a decent job but I wanted to explore other classification methods. 
+  I started modeling with K Nearest Neighbors. I figured that since the labelling is based on semantic similarity, a similarity based model would be a good fit. At first I was getting unreasonably good results but realized it was due to the way I was splitting my model into testing and training subsets. By randomly assigning data points (body sentences) to each subgroup I was essentially testing on sentences that came from blog posts that also appeared in my training set. I changed the way my data was stored to keep different blog sources separate. From here on a subset my testing and training sets by blog source. I trained on certain blogs and tested on others, preventing leakage. 
+<br/>
+  In the end I found that a Logistic Regression model gave me the best results. I used the full sentence vecotrs as well as features representing the similarity of a given sentence to those immediately prior and following it. 
 
 
 ## Results
