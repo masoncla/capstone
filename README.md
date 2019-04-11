@@ -1,4 +1,4 @@
-# Summarizing body of recipe blog posts
+# Recipe Blog Post Summarizer
 If you've ever looked for recipes online you might've come across blogs where you had to scroll through lengthy anecdotes before getting to the good stuff. My goal is to create an algorithm that will analyze all that text and return only the information that is relevant to the recipe. 
 
 ## Outline
@@ -33,8 +33,10 @@ Once I had the vectors for both the bodies and the sentences I could use cosine 
 
 
 ## Results
-will explain
-<img src="img/conf_mat.png" width="400">
+The ultimate goal of this project is to reduce the amount of irrelevant information one reads in recipe post so I prioritzed the precision of my model when evaluationg the results. The final model had an average precision of 73%. Below is an example of a blog post before and after being put through the model.
+
+I also took note that my validation data set was 75% "not relevant", so just predicted everything to be not relevant gave 75% accuracy. Many people do skip the entire body of a post and just look at the recipe at the bottom, so it was important that this model be an improvement on that. My model ended up with an accuracy of 86%, an 11% increase over the assumption that nothing is relevant. 
+
 
 ## Further Steps
 I'd like to revisit the labels I've created and check them all individually. While this system is effective on a basic level I think there are refinements that can be made to filter for relevant information that is not necessarily semantically similar to the instructions. I'd like to be able to apply this model effectively to comments left by readers, as these can contain useful tips or elaborations. Right now the block to that is that a comment saying something like "I love asparagus!" on a recipe for asparagus is relevant under my current definition but is not necessarily useful. Grabbing the useful information is a task that I would like to build this project into.
