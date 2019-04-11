@@ -1,15 +1,11 @@
-# Recipe Blog Post Summarizer
+<img src='img/header.png'>
 If you've ever looked for recipes online you might've come across blogs where you had to scroll through lengthy anecdotes before getting to the good stuff. My goal is to create an algorithm that will analyze all that text and return only the information that is relevant to the recipe. 
 
 ## Outline
 1. The Data
-
 2. Making it usable
-
 3. Modeling
-
 4. Results
-
 5. Further Steps
 
 ## The Data
