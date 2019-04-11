@@ -15,9 +15,9 @@ The data needed for this project doesn't exist anywhere neatly so I needed to sc
 <img align="center" src="img/data_pipeline.png" width="600">
 
 <img align="right" src="img/heatmap.png" width="400">
-<br/>
-<br/>
-## Making it usable
+
+
+## Making it Usable 
 I used Google's Universal Sentence Encoder(GUSE) to create vectorizations of every sentence. I want to capture the whole sentence rather than the words within. I tried using TFIDF vectorizations, based on inverse word frequency, but it created huge vector with less information than GUSE. GUSE also produces vectors of length 512 which is more manageable than the length of vectors produced by other sentence encoders, like Skip-Thoughts. 
 <br/>
 Once I had the vectors for both the bodies and the sentences I could use cosine similarity to generate labels for the body sentences, relevant or not. In this way I defined relevance as similarity to the final recipe.
