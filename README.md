@@ -36,7 +36,7 @@ Once I had the vectors for both the bodies and the sentences I could use cosine 
 The ultimate goal of this project is to reduce the amount of irrelevant information one reads in recipe post so I prioritzed the precision of my model when evaluationg the results. The final model had an average precision of 73%. Below is an example of a blog post before and after being put through the model.
 <img src='img/example.png'>
 I also took note that my validation data set was 75% "not relevant", so just predicting everything to be not relevant gave 75% accuracy. Many people do skip the entire body of a post and just look at the recipe at the bottom, so it was important that this model be an improvement on that. My model ended up with an accuracy of 86%, an 11% increase over the assumption that nothing is relevant. 
-<img align='right' src='img/conf_mat.png' width='300'>
+<img align='right' src='img/conf_mat.png' width='400'>
 <br/>
 <br/>
 
