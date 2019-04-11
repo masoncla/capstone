@@ -14,7 +14,7 @@ The data needed for this project doesn't exist anywhere neatly so I needed to sc
 
 <img align="center" src="img/data_pipeline.png" width="600">
 
-<img align="right" src="img/heatmap.png" width="300">
+<img align="right" src="img/heatmap.png" width="400">
 <br/>
 <br/>
 ## Making it usable
